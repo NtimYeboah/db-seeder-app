@@ -1,0 +1,27 @@
+{
+    "name": "NtimYeboah/database-seed-command",
+    "description": "A php console application to seed the database given a table",
+    "keywords": [
+        "database", "seed", "command"
+    ],
+    "authors": [
+        {
+            "name": "Ntim Yeboah",
+            "email": "ntimobedyeboah@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1",
+        "symfony/console": "^4.1",
+        "illuminate/database": "^5.6",
+        "illuminate/container": "^5.6",
+        "fzaninotto/faker": "^1.8"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "NtimYeboah\\": "src/"
+        }
+    }
+}

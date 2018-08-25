@@ -4,10 +4,19 @@ namespace NtimYeboah\Database;
 
 use Faker\Factory;
 use NtimYeboah\Models\User;
+use NtimYeboah\Database\Connection;
 use Illuminate\Database\Capsule\Manager as Capsule;
+use NtimYeboah\Database\Migrations\CreateUsersTable;
 
 class Seeder
 {
+    private $schema;
+
+    public function __construct(CreateUsersTable $schema)
+    {
+        $this->schema = $schema;
+    }
+
     /**
      * Run available table seeders
      * 
@@ -15,7 +24,7 @@ class Seeder
      */
     public function run()
     {
-        $this->dropUsersTable();
+        $this->prepare();
         $this->seedUsersTable();
     }
 
@@ -34,11 +43,11 @@ class Seeder
         ]);
     }
 
-    /**
-     * Drop users table if exists
-     */
-    private function dropUsersTable()
+    private function prepare()
     {
-        Capsule::schema()->drop('users'); 
+        Connection::initialize();
+
+        $this->schema->down();
+        $this->schema->up();
     }
 }

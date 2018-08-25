@@ -18,9 +18,9 @@ class SeedDatabaseCommand extends Command
      */
     private $seeder;
 
-    public function __construct()
+    public function __construct(Seeder $seeder)
     {
-        $this->seeder = new Seeder();
+        $this->seeder = $seeder;
 
         parent::__construct();
     }

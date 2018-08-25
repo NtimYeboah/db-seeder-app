@@ -16,7 +16,7 @@ class Connection
         $capsule->addConnection([
             'driver'    => 'mysql',
             'host'      => 'localhost',
-            'database'  => 'console_app',
+            'database'  => 'seeder-app',
             'username'  => 'homestead',
             'password'  => 'secret',
             'charset'   => 'utf8',

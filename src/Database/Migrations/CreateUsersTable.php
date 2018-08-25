@@ -18,4 +18,12 @@ class CreateUsersTable
             $table->timestamps();
         });
     }
+
+    /**
+     * Drop table if exists
+     */
+    public function down()
+    {
+        Capsule::schema()->dropIfExists('users');
+    }
 }

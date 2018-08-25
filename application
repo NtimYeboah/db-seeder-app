@@ -1,20 +1,16 @@
 #!/usr/bin/env php
 <?php
 
-use NtimYeboah\Database\Seeder;
-use NtimYeboah\Database\Connection;
+use Illuminate\Container\Container;
 use Symfony\Component\Console\Application;
 use NtimYeboah\Command\SeedDatabaseCommand;
-use NtimYeboah\Database\Migrations\CreateUsersTable;
 
 require __DIR__ . '/vendor/autoload.php';
 
-Connection::initialize();
-
-(new CreateUsersTable)->up();
+$container = Container::getInstance();
 
 $application = new Application('Database Seed Command');
-$application->add(new SeedDatabaseCommand);
+$application->add($container->make(SeedDatabaseCommand::class));
 
 $application->run();
 

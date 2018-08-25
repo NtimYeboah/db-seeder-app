@@ -50,6 +50,6 @@ class SeedDatabaseCommand extends Command
 
         $this->seeder->run();
         
-        $output->writeln('Done seeding database');
+        $output->writeln('Done seeding database...');
     }
 }

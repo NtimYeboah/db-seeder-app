@@ -25,5 +25,7 @@ class Connection
         ]);
 
         $capsule->setAsGlobal();
+
+        $capsule->bootEloquent();
     }
 }

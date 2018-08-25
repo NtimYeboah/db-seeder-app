@@ -37,10 +37,12 @@ class Seeder
     {
         $faker = Factory::create();
 
-        User::create([
-            'full_name' => $faker->name,
-            'email' => $faker->safeEmail
-        ]);
+        foreach (range(1, 20) as $index) {
+            User::create([
+                'full_name' => $faker->name,
+                'email' => $faker->safeEmail
+            ]);
+        }
     }
 
     private function prepare()

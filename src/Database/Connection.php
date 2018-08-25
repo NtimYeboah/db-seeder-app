@@ -15,10 +15,10 @@ class Connection
 
         $capsule->addConnection([
             'driver'    => 'mysql',
-            'host'      => 'localhost',
-            'database'  => 'seeder-app',
-            'username'  => 'homestead',
-            'password'  => 'secret',
+            'host'      => getenv('DB_HOST'),
+            'database'  => getenv('DB_DATABASE'),
+            'username'  => getenv('DB_USERNAME'),
+            'password'  => getenv('DB_PASSWORD'),
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => ''

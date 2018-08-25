@@ -1,5 +1,5 @@
 {
-    "name": "NtimYeboah/database-seed-command",
+    "name": "NtimYeboah/db-seeder-app",
     "description": "A php console application to seed the database given a table",
     "keywords": [
         "database", "seed", "command"

@@ -15,7 +15,9 @@ $ composer install
 
 Set your database connection values in the `.env` file
 
-See the database
+Seed the database
 ```base
 $ php application db:seed
 ```
+
+Inspect that the `users` table of the database has 20 rows.

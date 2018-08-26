@@ -3,7 +3,6 @@
 namespace NtimYeboah\Database;
 
 use Faker\Factory;
-use NtimYeboah\Models\User;
 use NtimYeboah\Database\Connection;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use NtimYeboah\Database\Migrations\CreateUsersTable;
@@ -37,12 +36,15 @@ class Seeder
     {
         $faker = Factory::create();
 
-        foreach (range(1, 20) as $index) {
-            User::create([
+        $users = array_map(function() use ($faker) {
+            return [
                 'full_name' => $faker->name,
-                'email' => $faker->safeEmail
-            ]);
-        }
+                'email' => $faker->safeEmail,
+                'created_at' => date('Y-m-d h:i:s', time())
+            ];
+        }, range(1, 20));
+
+        Capsule::table('users')->insert($users);
     }
 
     private function prepare()

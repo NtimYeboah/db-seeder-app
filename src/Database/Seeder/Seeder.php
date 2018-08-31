@@ -13,6 +13,11 @@ class Seeder
      */
     protected $seeders = [];
 
+    /**
+     * Run all seeders.
+     * 
+     * @return void
+     */
     public function run()
     {
         foreach ($this->seeders as $seeder) {
@@ -23,14 +28,4 @@ class Seeder
             (new $seeder)->run();
         }  
     }
-
-    /**
-     * Run all seeders.
-     * 
-     * @return void
-     */
-    public function runSeeders()
-    {
-        
-    } 
 }

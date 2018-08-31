@@ -30,7 +30,7 @@ class Migration
     {
         foreach ($this->migrations as $migration) {
             if (! method_exists($migration, 'up')) {
-                throw new InvalidArgumentException('Method run does not exist on ', get_class($migration));
+                throw new \InvalidArgumentException('Method run does not exist on ', get_class($migration));
             }
 
             (new $migration)->up();

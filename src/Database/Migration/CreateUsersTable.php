@@ -1,6 +1,6 @@
 <?php
 
-namespace NtimYeboah\Database\Migrations;
+namespace NtimYeboah\Database\Migration;
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 

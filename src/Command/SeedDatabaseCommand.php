@@ -2,24 +2,32 @@
 
 namespace NtimYeboah\Command;
 
-use NtimYeboah\Database\Seeder;
+use NtimYeboah\Database\Migration\Schema;
 use Symfony\Component\Console\Command\Command;
+use NtimYeboah\Database\Seeder\DatabaseSeeder;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-
 class SeedDatabaseCommand extends Command
 {
     /**
-     * The seeder instance
+     * Table schema.
      * 
-     * @var \NtimYeboah\Database\Seeder
+     * @var \NtimYeboah\Database\Migration\Schema
+     */
+    private $schema;
+
+    /**
+     * The seeder instance.
+     * 
+     * @var \NtimYeboah\Database\Seeder\DatabaseSeeder
      */
     private $seeder;
 
-    public function __construct(Seeder $seeder)
+    public function __construct(Schema $schema, DatabaseSeeder $seeder)
     {
+        $this->schema = $schema;
         $this->seeder = $seeder;
 
         parent::__construct();
@@ -48,6 +56,7 @@ class SeedDatabaseCommand extends Command
     {
         $output->writeln('Seeding database...');
 
+        $this->schema->run();
         $this->seeder->run();
         
         $output->writeln('Done seeding database...');

@@ -18,14 +18,53 @@ class Seeder
      * 
      * @return void
      */
-    public function run()
+    public function call($class = null)
     {
-        foreach ($this->seeders as $seeder) {
-            if (! method_exists($seeder, 'run')) {
-                throw new \InvalidArgumentException('Method run does not exist on class', get_class($seeder));
+        if (! is_null($class)) {
+            $qualifiedClassName = $this->getQualifiedClassName($class);
+
+            if (is_null($qualifiedClassName)) {
+                throw new \InvalidArgumentException('Class does not exists'. get_class($class));
             }
 
-            (new $seeder)->run();
-        }  
+            $this->runSeeder($qualifiedClassName);
+        } else {
+            foreach ($this->seeders as $seeder) {   
+                $this->runSeeder($seeder);
+            } 
+        }   
+    }
+
+    /**
+     * Run a specific seeder
+     * 
+     * @param string $class
+     */
+    private function runSeeder($class) 
+    {
+        if (! method_exists($class, 'run')) {
+            throw new \InvalidArgumentException('Method run does not exist on class'. get_class($class));
+        }
+
+        (new $class)->run();
+    }
+
+    /**
+     * Get qualified class name
+     * 
+     * @param string $class
+     * @return string|null
+     */
+    private function getQualifiedClassName($class) 
+    {
+        foreach ($this->seeders as $seeder) {
+            list($authorName, $databaseDir, $seederDir, $className) = explode('\\', $seeder);
+            
+            if ($className === $class) {
+                return $seeder;
+            }
+
+            return null;
+        }
     }
 }

@@ -5,6 +5,7 @@ namespace NtimYeboah\Command;
 use NtimYeboah\Database\Migration\Schema;
 use Symfony\Component\Console\Command\Command;
 use NtimYeboah\Database\Seeder\DatabaseSeeder;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -42,7 +43,8 @@ class SeedDatabaseCommand extends Command
     {
         $this->setName('db:seed')
             ->setDescription('Seed database')
-            ->setHelp('This command allows you to seed a database');
+            ->setHelp('This command allows you to seed a database')
+            ->addOption('class', 'c', InputOption::VALUE_OPTIONAL, 'Specify the seeder class to run');
     }
 
     /**
@@ -56,8 +58,10 @@ class SeedDatabaseCommand extends Command
     {
         $output->writeln('Seeding database...');
 
+        $class = $input->getOption('class') ?: null;
+        
         $this->schema->run();
-        $this->seeder->run();
+        $this->seeder->call($class);
         
         $output->writeln('Done seeding database...');
     }

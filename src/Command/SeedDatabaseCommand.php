@@ -58,10 +58,10 @@ class SeedDatabaseCommand extends Command
     {
         $output->writeln('Seeding database...');
 
-        $class = $input->getOption('class') ?: null;
+        $seederClass = $input->getOption('class') ?: null;
         
-        $this->schema->run();
-        $this->seeder->call($class);
+        $this->schema->run($seederClass);
+        $this->seeder->call($seederClass);
         
         $output->writeln('Done seeding database...');
     }

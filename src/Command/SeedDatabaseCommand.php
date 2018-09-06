@@ -61,6 +61,10 @@ class SeedDatabaseCommand extends Command
 
         $seederClass = $input->getOption('class') ?: null;
         $rerunMigrations = $input->getOption('rerun') !== false;
+
+        if (! is_null($seederClass) && $rerunMigrations !== false) {
+            throw new \InvalidArgumentException('Cannot run class and rerun switches at the same time');
+        }
         
         $this->schema->run($seederClass, $rerunMigrations);
         $this->seeder->call($seederClass);

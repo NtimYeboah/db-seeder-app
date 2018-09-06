@@ -22,11 +22,11 @@ class Migration
      */
     protected $namespace = 'NtimYeboah\\Database\\Migration\\';
 
-    public function run($seederClass = null, $rerun = false)
+    public function run($rerun = false, $seederClass = null)
     {
         $this->makeDbConnection();
 
-        $this->runMigrations($seederClass, $rerun);
+        $this->runMigrations($rerun, $seederClass);
     }
 
     /**
@@ -34,7 +34,7 @@ class Migration
      * 
      * @return void
      */
-    private function runMigrations($seederClass = null, $rerun = false)
+    private function runMigrations($rerun = false, $seederClass = null)
     {
         if (! is_null($seederClass)) {
             $table = $this->getSeederTable($seederClass);
@@ -100,7 +100,8 @@ class Migration
      * @param string $migration
      * @return void
      */
-    private function dropTable($migration){
+    private function dropTable($migration)
+    {
         if (! method_exists($migration, 'down')) {
             throw new \InvalidArgumentException('Method run does not exist on ', get_class($migration));
         }

@@ -66,7 +66,7 @@ class SeedDatabaseCommand extends Command
             throw new \InvalidArgumentException('Cannot run class and rerun switches at the same time');
         }
         
-        $this->schema->run($seederClass, $rerunMigrations);
+        $this->schema->run($rerunMigrations, $seederClass);
         $this->seeder->call($seederClass);
         
         $output->writeln('Done seeding database...');

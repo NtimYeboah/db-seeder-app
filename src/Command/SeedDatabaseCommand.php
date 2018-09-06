@@ -44,7 +44,8 @@ class SeedDatabaseCommand extends Command
         $this->setName('db:seed')
             ->setDescription('Seed database')
             ->setHelp('This command allows you to seed a database')
-            ->addOption('class', 'c', InputOption::VALUE_OPTIONAL, 'Specify the seeder class to run');
+            ->addOption('class', 'c', InputOption::VALUE_OPTIONAL, 'Specify the seeder class to run')
+            ->addOption('rerun', 'r', InputOption::VALUE_OPTIONAL, 'Specify to rerun the seeders', false);
     }
 
     /**
@@ -59,8 +60,9 @@ class SeedDatabaseCommand extends Command
         $output->writeln('Seeding database...');
 
         $seederClass = $input->getOption('class') ?: null;
+        $rerunMigrations = $input->getOption('rerun') !== false;
         
-        $this->schema->run($seederClass);
+        $this->schema->run($seederClass, $rerunMigrations);
         $this->seeder->call($seederClass);
         
         $output->writeln('Done seeding database...');
